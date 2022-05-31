@@ -10,11 +10,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.elasticsearch.action.index.IndexResponse;
 import org.example.common.Result;
+import org.example.common.annotation.Limit;
+import org.example.common.aop.LimitType;
 import org.example.domin.EsGoods;
 import org.example.domin.Goods;
 import org.example.service.EsService;
 import org.example.service.SendService;
 import org.example.service.impl.ChannelFactory;
+import org.example.service.impl.MyMailServiceImpl;
 import org.example.service.impl.TestServiceImpl;
 import org.example.utils.RedisUtil;
 import org.redisson.Redisson;
@@ -54,6 +57,8 @@ public class TestController {
     private ChannelFactory channelFactory;
     @Resource
     private RedisUtil redisUtil;
+    @Resource
+    private MyMailServiceImpl myMailServiceImpl;
 
     @ApiOperation(value = "Redis操作Set", notes = "Redis操作Set")
     @PostMapping("set")
@@ -271,7 +276,7 @@ public class TestController {
     @ApiOperation(value = "测试线程池", notes = "测试线程池")
     @PostMapping("testThreadPool")
     public void testThreadPool() throws ExecutionException, InterruptedException {
-        testServiceImpl.testThreadPool3();
+        testServiceImpl.testThreadPool2();
     }
 
     @ApiOperation(value = "测试缓存--获取商品列表", notes = "测试缓存--获取商品列表")
@@ -345,6 +350,25 @@ public class TestController {
         map.put("b", 4);
         redisUtil.hmset("hashKey", map);
 
+        return Result.successToClient();
+    }
+
+    @ApiOperation(value = "限流测试", notes = "限流测试")
+    @PostMapping("/limit")
+    @Limit(period = 60, count = 10, name = "testLimit", prefix = "limit", limitType = LimitType.IP)
+    public Result<String> limit(){
+        return Result.successToClient("测试成功");
+    }
+
+    @ApiOperation(value = "发送邮件", notes = "发送邮件")
+    @PostMapping("/sendMailTest")
+    public Result<Void> sendMailTest() {
+        myMailServiceImpl.sendMail(
+                "1196302555@qq.com",
+                "1196302555@qq.com",
+                "1196302555@qq.com",
+                "SpringBoot发送邮件",
+                "邮件发送成功啦!");
         return Result.successToClient();
     }
 

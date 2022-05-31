@@ -82,7 +82,7 @@ public class TestServiceImpl {
         executor.execute(() -> {
             try {
                 System.out.println("Thread 1 is running……");
-                System.out.println("Thread 1的名字：" + executor);
+                System.out.println("Thread 1的名字：" + Thread.currentThread().getName());
                 Thread.sleep(5000); //睡5秒
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -95,7 +95,7 @@ public class TestServiceImpl {
         executor.execute(() -> {
             try {
                 System.out.println("Thread 2 is running……");
-                System.out.println("Thread 2的名字：" + executor);
+                System.out.println("Thread 2的名字：" + Thread.currentThread().getName());
                 Thread.sleep(2000); //睡5秒
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -108,7 +108,7 @@ public class TestServiceImpl {
         executor.execute(() -> {
             try {
                 System.out.println("Thread 3 is running……");
-                System.out.println("Thread 3的名字：" + executor);
+                System.out.println("Thread 3的名字：" + Thread.currentThread().getName());
                 Thread.sleep(3000); //睡5秒
             } catch (InterruptedException e) {
                 e.printStackTrace();

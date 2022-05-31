@@ -23,7 +23,7 @@ public class ExecutorConfig {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //配置核心线程数
         int poolSize = Runtime.getRuntime().availableProcessors();
-        executor.setCorePoolSize(poolSize);
+        executor.setCorePoolSize(4);
         //配置最大线程数
         executor.setMaxPoolSize(10);
         //配置队列大小

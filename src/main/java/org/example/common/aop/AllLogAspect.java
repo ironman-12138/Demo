@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 @Order(1)
 @Slf4j
@@ -43,7 +44,7 @@ public class AllLogAspect {
             log.info("接口请求路径:{},请求参数:{},流水号:{}", request.getRequestURI(), requestParam, TLocalHelper.getSeq());
         Object result = proceeding.proceed();
         if (request != null)
-            log.info("接口执行结束,耗时:{}ms,返回数据:{},流水号:{}", System.currentTimeMillis() - startTime, result.toString(), TLocalHelper.getSeq());
+            log.info("接口执行结束,耗时:{}ms,返回数据:{},流水号:{}", System.currentTimeMillis() - startTime, Objects.nonNull(result) ? result.toString() : "null", TLocalHelper.getSeq());
         return result;
     }
 
