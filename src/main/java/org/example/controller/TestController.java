@@ -14,10 +14,12 @@ import org.example.common.annotation.Limit;
 import org.example.common.aop.LimitType;
 import org.example.domin.EsGoods;
 import org.example.domin.Goods;
+import org.example.domin.myenum.IntegerEnum;
 import org.example.service.EsService;
 import org.example.service.SendService;
 import org.example.service.impl.ChannelFactory;
 import org.example.service.impl.MyMailServiceImpl;
+import org.example.service.impl.Server;
 import org.example.service.impl.TestServiceImpl;
 import org.example.utils.RedisUtil;
 import org.redisson.Redisson;
@@ -370,6 +372,14 @@ public class TestController {
                 "SpringBoot发送邮件",
                 "邮件发送成功啦!");
         return Result.successToClient();
+    }
+
+    @ApiOperation(value = "获取系统信息", notes = "获取系统信息")
+    @PostMapping("/serverData")
+    public Result<Server> serverData() throws Exception {
+        Server server = new Server();
+        server.copyTo();
+        return Result.successToClient(server);
     }
 
 }

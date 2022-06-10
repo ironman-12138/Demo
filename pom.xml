@@ -27,6 +27,8 @@
     <swagger.version>2.7.0</swagger.version>
     <!--knife4j-->
     <knife4j.version>2.0.4</knife4j.version>
+    <oshi.version>6.1.2</oshi.version>
+    <jna.version>5.10.0</jna.version>
   </properties>
 
   <dependencies>
@@ -171,15 +173,39 @@
       <version>1.2.47</version>
     </dependency>
 
+    <!--添加邮件依赖-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+
+    <!-- 获取系统信息 -->
+    <dependency>
+      <groupId>com.github.oshi</groupId>
+      <artifactId>oshi-core</artifactId>
+      <version>${oshi.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>${jna.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna-platform</artifactId>
+      <version>${jna.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
     </dependency>
 
-    <!--添加邮件依赖-->
+    <!-- websocket的包 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-mail</artifactId>
+      <artifactId>spring-boot-starter-websocket</artifactId>
     </dependency>
 
   </dependencies>
